@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Katalog Game & Akun</title>
+  <style>
+    :root { --primary-blue: #1b52e8; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+    body { background-color: #ffffff; color: #333; padding-bottom: 40px; }
+    .container { max-width: 900px; margin: 0 auto; padding: 15px; }
+
+    /* Desain Tombol Panjang Utama */
+    .banner-jual {
+      background: linear-gradient(135deg, #1b52e8, #0b2f91);
+      color: #fff; text-align: center; padding: 18px 15px;
+      border-radius: 12px; font-weight: 800; font-size: 1.1rem;
+      text-decoration: none; display: block; margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(27, 82, 232, 0.3); text-transform: uppercase;
+    }
+
+    /* Judul Bagian / Kategori */
+    .section-title { 
+      font-weight: 900; 
+      font-size: 1.05rem; 
+      text-transform: uppercase; 
+      margin-top: 25px; 
+      margin-bottom: 12px; 
+      color: #111; 
+    }
+
+    /* Grid Kotak */
+    .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    @media (min-width: 650px) { .card-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    /* Tampilan Kotak Kartu */
+    .game-card {
+      background-color: var(--primary-blue); border-radius: 14px;
+      overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); cursor: pointer;
+    }
+    .image-wrapper { position: relative; width: 100%; padding-top: 100%; background: #eee; }
+    .image-wrapper img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+    .card-title-box { background-color: var(--primary-blue); color: white; text-align: center; padding: 12px 8px; font-weight: 800; font-size: 0.95rem; text-transform: uppercase; }
+
+    /* Popup Modal */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 999; padding: 20px; }
+    .modal-box { background: #fff; padding: 25px 20px; border-radius: 16px; text-align: center; max-width: 350px; width: 100%; }
+    .modal-box h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 20px; color: #111; line-height: 1.4; }
+    .btn-popup-confirm { background: var(--primary-blue); color: #fff; border: none; padding: 12px; border-radius: 8px; font-weight: bold; width: 100%; margin-bottom: 8px; cursor: pointer; }
+    .btn-popup-cancel { background: #e0e0e0; color: #333; border: none; padding: 10px; border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Tombol Paling Atas (Pesan sama dengan bagian 1) -->
+    <a href="javascript:void(0)" onclick="bukaPopup('JUAL SESUAI SERVER DI DISCORD YA;)')" class="banner-jual">
+      KEBUTUHAN GAME by VPUTRA STORE
+    </a>
+
+    <!-- BAGIAN 1 -->
+    <div class="section-title"><span>★</span> JUAL AKUN KALIAN DI BAWAH!</div>
+    <div class="card-grid" id="gridBagian1"></div>
+
+    <!-- BAGIAN 2 -->
+    <div class="section-title"><span>★</span> BELI AKUN DI BAWAH!</div>
+    <div class="card-grid" id="gridBagian2"></div>
+
+    <!-- BAGIAN 3 -->
+    <div class="section-title"><span>★</span> JOKO DI BAWAH!</div>
+    <div class="card-grid" id="gridBagian3"></div>
+
+    <!-- BAGIAN 4 -->
+  <div class="section-title"><span>★</span> BELI ITEM GAME DI BAWAH!</div>
+    <div class="card-grid" id="gridBagian4"></div>
+
+  </div>
+
+  <!-- Pop-up -->
+  <div class="modal-overlay" id="popupModal">
+    <div class="modal-box">
+      <h3 id="popupText">PESAN POPUP</h3>
+      <button class="btn-popup-confirm" onclick="lanjutKeDiscord()">LANJUT KE DISCORD</button>
+      <button class="btn-popup-cancel" onclick="tutupPopup()">Batal</button>
+    </div>
+  </div>
+
+  <script>
+    const DISCORD_LINK = "https://discord.gg/6rCJ4pSB6";
+
+    // PESAN POPUP UNTUK MASING-MASING BAGIAN (Satu bagian 1 pesan sama)
+    const PESAN_BAGIAN_1 = "SILAHKAN JOIN DAN PILIH SERVER DISCORD SESUAI PRODUK YA;)!";
+    const PESAN_BAGIAN_2 = "SILAHKAN JOIN DAN PILIH SERVER DISCORD SESUAI PRODUK YA;)!";
+    const PESAN_BAGIAN_3 = "SILAHKAN JOIN DAN PILIH SERVER DISCORD SESUAI PRODUK YA;)!";
+    const PESAN_BAGIAN_4 = "SILAHKAN JOIN DAN PILIH SERVER DISCORD SESUAI PRODUK YA;)!";
+
+    // DATA PRODUK BAGIAN 1
+    const dataBagian1 = [
+      {
+        nama: "FREE FIRE MAX/BIASA",
+        gambar: "https://i.postimg.cc/zXJZJ2vX/IMG-00ef2ce9-c3d0-4749-9426-a4e0c1affdd6.jpg"
+      },
+      {
+        nama: "ROBLOX",
+        gambar: "https://i.postimg.cc/J41V1Y0H/IMG-7c06eb64-ece6-40ea-a374-17c60bb5799b.jpg"
+      }
+    ];
+
+    // DATA PRODUK BAGIAN 2
+    const dataBagian2 = [
+      {
+        nama: "FREE FIRE",
+        gambar: "https://i.postimg.cc/zXJZJ2vX/IMG-00ef2ce9-c3d0-4749-9426-a4e0c1affdd6.jpg"
+      },
+      {
+        nama: "ROBLOX",
+        gambar: "https://i.postimg.cc/J41V1Y0H/IMG-7c06eb64-ece6-40ea-a374-17c60bb5799b.jpg"
+      }
+    ];
+
+    // DATA PRODUK BAGIAN 3
+    const dataBagian3 = [
+      {
+        nama: "ROBLOX",
+        gambar: "https://i.postimg.cc/J41V1Y0H/IMG-7c06eb64-ece6-40ea-a374-17c60bb5799b.jpg"
+      },
+          ];
+
+    // DATA PRODUK BAGIAN 4
+    const dataBagian4 = [
+      {
+        nama: "ROBLOX ITEM",
+        gambar: "https://i.postimg.cc/J41V1Y0H/IMG-7c06eb64-ece6-40ea-a374-17c60bb5799b.jpg"
+      }
+    ];
+
+    function bukaPopup(pesan) { 
+      document.getElementById('popupText').innerText = pesan; 
+      document.getElementById('popupModal').style.display = 'flex'; 
+    }
+    
+    function tutupPopup() { 
+      document.getElementById('popupModal').style.display = 'none'; 
+    }
+    
+    function lanjutKeDiscord() { 
+      tutupPopup(); 
+      window.open(DISCORD_LINK, '_blank'); 
+    }
+
+    function renderGrid(dataArray, elementId, pesanBagian) {
+      const grid = document.getElementById(elementId);
+      if(!grid) return;
+      grid.innerHTML = '';
+      dataArray.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'game-card';
+        // Semua produk di bagian ini memakai pesan popup yang sama
+        card.onclick = function() { bukaPopup(pesanBagian); };
+        card.innerHTML = `
+          <div class="image-wrapper"><img src="${item.gambar}" alt="${item.nama}" onerror="this.src='https://via.placeholder.com/300x300?text=No+Image'"></div>
+          <div class="card-title-box">${item.nama}</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Render masing-masing bagian dengan pesannya masing-masing
+    renderGrid(dataBagian1, 'gridBagian1', PESAN_BAGIAN_1);
+    renderGrid(dataBagian2, 'gridBagian2', PESAN_BAGIAN_2);
+    renderGrid(dataBagian3, 'gridBagian3', PESAN_BAGIAN_3);
+    renderGrid(dataBagian4, 'gridBagian4', PESAN_BAGIAN_4);
+  </script>
+</body>
+</html>
