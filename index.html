@@ -1,12 +1,43 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Katalog Game & Akun</title>
-  <meta name="google-site-verification" content="7s3BOq6HVQaCQ_Acw7v2Hka3BocP0-0uwPP1UebJMe8" />
+  <title>web vputra store all games</title>
+<meta name="google-site-verification" content="googleb51ebc79c924710a.html" />
   
   <style>
+
+    /* Gaya Tombol Mengambang (Floating Button Butuh Bantuan) */
+.floating-help-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+    background-color: #1b52e8; /* Warna biru, bisa diganti */
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border-radius: 50px; /* Bikin bentuk lonjong/kapsul, ganti jadi 50% kalau mau bulat penuh */
+    box-shadow: 0 4px 15px rgba(27, 82, 232, 0.4);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: transform 0.2s ease;
+}
+
+.floating-help-btn:active {
+    transform: scale(0.95);
+}
+
+.floating-help-btn svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}
+
     :root { --primary-blue: #1b52e8; }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
     body { background-color: #ffffff; color: #333; padding-bottom: 40px; }
@@ -25,7 +56,7 @@
     .section-title { 
       font-weight: 900; 
       font-size: 1.05rem; 
-      text-transform: uppercase; 
+      text-transform: uppercase;
       margin-top: 25px; 
       margin-bottom: 12px; 
       color: #111; 
@@ -62,19 +93,19 @@
     </a>
 
     <!-- BAGIAN 1 -->
-    <div class="section-title"><span>★</span> JUAL AKUN KALIAN DI BAWAH!</div>
+    <div class="section-title"><span>$</span> JUAL AKUN DI BAWAH!</div>
     <div class="card-grid" id="gridBagian1"></div>
 
     <!-- BAGIAN 2 -->
-    <div class="section-title"><span>★</span> BELI AKUN DI BAWAH!</div>
+    <div class="section-title"><span>$</span> BELI AKUN DI BAWAH!</div>
     <div class="card-grid" id="gridBagian2"></div>
 
     <!-- BAGIAN 3 -->
-    <div class="section-title"><span>★</span> JOKO DI BAWAH!</div>
+    <div class="section-title"><span>$</span> JOKO DI BAWAH!</div>
     <div class="card-grid" id="gridBagian3"></div>
 
     <!-- BAGIAN 4 -->
-  <div class="section-title"><span>★</span> BELI ITEM GAME DI BAWAH!</div>
+  <div class="section-title"><span>$</span> BELI ITEM GAME DI BAWAH!</div>
     <div class="card-grid" id="gridBagian4"></div>
 
   </div>
@@ -92,7 +123,7 @@
     const DISCORD_LINK = "https://discord.gg/6rCJ4pSB6";
 
     // PESAN POPUP UNTUK MASING-MASING BAGIAN (Satu bagian 1 pesan sama)
-    const PESAN_BAGIAN_1 = "SILAHKAN JOIN DAN PILIH SERVER DISCORD SESUAI PRODUK YA;)!";
+    const PESAN_BAGIAN_1 = "SEDANG TIDAK TERSEDIA!,JANGAN KLIK";
     const PESAN_BAGIAN_2 = "SILAHKAN JOIN DAN PILIH SERVER DISCORD SESUAI PRODUK YA;)!";
     const PESAN_BAGIAN_3 = "SILAHKAN JOIN DAN PILIH SERVER DISCORD SESUAI PRODUK YA;)!";
     const PESAN_BAGIAN_4 = "SILAHKAN JOIN DAN PILIH SERVER DISCORD SESUAI PRODUK YA;)!";
@@ -100,11 +131,11 @@
     // DATA PRODUK BAGIAN 1
     const dataBagian1 = [
       {
-        nama: "FREE FIRE MAX/BIASA",
+        nama: "TIDAK TERSEDIA",
         gambar: "https://i.postimg.cc/zXJZJ2vX/IMG-00ef2ce9-c3d0-4749-9426-a4e0c1affdd6.jpg"
       },
       {
-        nama: "ROBLOX",
+        nama: "TIDAK TERSEDIA",
         gambar: "https://i.postimg.cc/J41V1Y0H/IMG-7c06eb64-ece6-40ea-a374-17c60bb5799b.jpg"
       }
     ];
@@ -112,11 +143,11 @@
     // DATA PRODUK BAGIAN 2
     const dataBagian2 = [
       {
-        nama: "FREE FIRE",
+        nama: "TIDAK TERSEDIA",
         gambar: "https://i.postimg.cc/zXJZJ2vX/IMG-00ef2ce9-c3d0-4749-9426-a4e0c1affdd6.jpg"
       },
       {
-        nama: "ROBLOX",
+        nama: "ROBLOX ALL MAP",
         gambar: "https://i.postimg.cc/J41V1Y0H/IMG-7c06eb64-ece6-40ea-a374-17c60bb5799b.jpg"
       }
     ];
@@ -124,7 +155,7 @@
     // DATA PRODUK BAGIAN 3
     const dataBagian3 = [
       {
-        nama: "ROBLOX",
+        nama: "ROBLOX ALL MAP",
         gambar: "https://i.postimg.cc/J41V1Y0H/IMG-7c06eb64-ece6-40ea-a374-17c60bb5799b.jpg"
       },
           ];
@@ -132,7 +163,7 @@
     // DATA PRODUK BAGIAN 4
     const dataBagian4 = [
       {
-        nama: "ROBLOX ITEM",
+        nama: "ROBLOX ITEM ALL MAP",
         gambar: "https://i.postimg.cc/J41V1Y0H/IMG-7c06eb64-ece6-40ea-a374-17c60bb5799b.jpg"
       }
     ];
@@ -174,6 +205,15 @@
     renderGrid(dataBagian3, 'gridBagian3', PESAN_BAGIAN_3);
     renderGrid(dataBagian4, 'gridBagian4', PESAN_BAGIAN_4);
   </script>
+
+<!-- Tombol Butuh Bantuan Mengambang -->
+<a href="https://discord.com/channels/1561705532778225795/1562364128876691476" target="_blank" class="floating-help-btn">
+    <!-- Gambar/Ikon Pesan Ber-headset (SVG) -->
+    <svg viewBox="0 0 24 24">
+        <path d="M12 1C6.48 1 2 5.48 2 11c0 2.21.71 4.26 1.91 5.93L2.5 21.5l4.82-1.37C9.02 21.01 10.47 21.5 12 21.5c5.52 0 10-4.48 10-10S17.52 1 12 1zm1 14.5h-2v-2h2v2zm0-4h-2V7h2v4.5z"/>
+    </svg>
+    <span>BANTUAN?</span>
+</a>
+  
 </body>
 </html>
-
