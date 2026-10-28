@@ -8,6 +8,87 @@
   
   <style>
 
+/* Styling Search Bar Floating ala TikTok */
+.sticky-search-container {
+    position: sticky;
+    top: 10px;
+    z-index: 999;
+    padding: 0 10px;
+    margin-bottom: 15px;
+}
+
+.search-box-tiktok {
+    display: flex;
+    align-items: center;
+    background-color: #f1f2f5;
+    border-radius: 25px;
+    padding: 8px 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 2px solid #1b52e8;
+}
+
+.search-box-tiktok svg {
+    width: 20px;
+    height: 20px;
+    fill: #666;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.search-input-tiktok {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 0.95rem;
+    color: #222;
+    font-weight: 600;
+}
+
+.search-input-tiktok::placeholder {
+    color: #888;
+    font-weight: 400;
+}
+
+    
+    /* Gaya Tombol Mengambang Panah Scroll ke Bawah */
+.floating-scroll-btn {
+    position: fixed;
+    bottom: 90px; /* Di atas tombol bantuan */
+    right: 25px;
+    z-index: 9998;
+    background-color: #1b52e8; /* Warna biru */
+    color: white;              /* Isi/ikon warna putih */
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;        /* Bentuk lingkaran penuh */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(27, 82, 232, 0.4);
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.floating-scroll-btn:active {
+    transform: scale(0.92);
+}
+
+.floating-scroll-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    animation: bounceDown 1.5s infinite; /* Efek panah bergerak ke bawah */
+}
+
+/* Animasi panah bergerak naik-turun dikit biar kelihatan hidup */
+@keyframes bounceDown {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(4px); }
+    60% { transform: translateY(2px); }
+}
+
     /* Gaya Tombol Mengambang (Floating Button Butuh Bantuan) */
 .floating-help-btn {
     position: fixed;
@@ -85,6 +166,18 @@
 </head>
 <body>
 
+  <!-- Kotak Pencarian Sticky ala TikTok -->
+<div class="sticky-search-container">
+    <div class="search-box-tiktok">
+        <!-- Ikon Kaca Pembesar (Search) -->
+        <svg viewBox="0 0 24 24">
+            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        </svg>
+        <input type="text" id="searchInput" class="search-input-tiktok" placeholder="Cari produk[nama game] (contoh:Roblox,FF,DLL)..." onkeyup="filterProduk()">
+    </div>
+</div>
+
+
   <div class="container">
     
     <!-- Tombol Paling Atas (Pesan sama dengan bagian 1) -->
@@ -108,6 +201,9 @@
   <div class="section-title"><span>$</span> BELI ITEM GAME DI BAWAH!</div>
     <div class="card-grid" id="gridBagian4"></div>
 
+    <div class="section-title"><span>$</span> VOUCHER/CLOUD PHONE!</div>
+    <div class="card-grid" id="gridBagian5"></div>
+
   </div>
 
   <!-- Pop-up -->
@@ -124,9 +220,10 @@
 
     // PESAN POPUP UNTUK MASING-MASING BAGIAN (Satu bagian 1 pesan sama)
     const PESAN_BAGIAN_1 = "SEDANG TIDAK TERSEDIA!,JANGAN KLIK";
-    const PESAN_BAGIAN_2 = "SILAHKAN JOIN DAN PILIH SERVER DISCORD SESUAI PRODUK YA;)!";
-    const PESAN_BAGIAN_3 = "SILAHKAN JOIN DAN PILIH SERVER DISCORD SESUAI PRODUK YA;)!";
-    const PESAN_BAGIAN_4 = "SILAHKAN JOIN DAN PILIH SERVER DISCORD SESUAI PRODUK YA;)!";
+    const PESAN_BAGIAN_2 = "UNTUK ORDER SILAHKAN JOIN DAN PILIH SERVER DISCORD SESUAI PRODUK YA;)!";
+    const PESAN_BAGIAN_3 = "UNTUK ORDER SILAHKAN JOIN DAN PILIH SERVER DISCORD SESUAI PRODUK YA;)!";
+    const PESAN_BAGIAN_4 = "UNTUK ORDER SILAHKAN JOIN DAN PILIH SERVER DISCORD SESUAI PRODUK YA;)!";
+    const PESAN_BAGIAN_5 = "UNTUK ORDER SILAHKAN JOIN DAN PILIH SERVER DISCORD SESUAI PRODUK YA;)!";
 
     // DATA PRODUK BAGIAN 1
     const dataBagian1 = [
@@ -168,6 +265,13 @@
       }
     ];
 
+    const dataBagian5 = [
+      {
+        nama: "REDFINGER(VIA CODE/OTORISASI",
+        gambar: "https://i.postimg.cc/fWSR0Gn4/IMG-d067da95-1790-4ab4-a001-48200696b742.jpg"
+      }
+    ];
+
     function bukaPopup(pesan) { 
       document.getElementById('popupText').innerText = pesan; 
       document.getElementById('popupModal').style.display = 'flex'; 
@@ -204,6 +308,25 @@
     renderGrid(dataBagian2, 'gridBagian2', PESAN_BAGIAN_2);
     renderGrid(dataBagian3, 'gridBagian3', PESAN_BAGIAN_3);
     renderGrid(dataBagian4, 'gridBagian4', PESAN_BAGIAN_4);
+    renderGrid(dataBagian5, 'gridBagian5', PESAN_BAGIAN_5);
+
+
+// Fungsi Fitur Pencarian Real-Time
+function filterProduk() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('.game-card');
+
+    cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(input)) {
+            card.style.display = ""; // Tampilkan jika cocok
+        } else {
+            card.style.display = "none"; // Sembunyikan jika tidak cocok
+        }
+    });
+}
+
+    
   </script>
 
 <!-- Tombol Butuh Bantuan Mengambang -->
@@ -214,6 +337,14 @@
     </svg>
     <span>BANTUAN?</span>
 </a>
-  
+
+  <!-- Tombol Mengambang Panah ke Bawah (Scroll Indikator) -->
+<a href="#" onclick="window.scrollBy({top: 400, behavior: 'smooth'}); return false;" class="floating-scroll-btn" title="Scroll ke bawah">
+    <!-- Ikon Panah ke Bawah (SVG warna putih) -->
+    <svg viewBox="0 0 24 24">
+        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+    </svg>
+</a>
+
 </body>
 </html>
