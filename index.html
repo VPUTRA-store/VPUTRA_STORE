@@ -7,6 +7,26 @@
   <meta name="google-site-verification" content="googleb51ebc79c924710a.html" />
   
   <style>
+
+/* Styling Kotak Benar-benar di Tengah Layar */
+.floating-update-box {
+    position: fixed;
+    top: 50%;              /* Tarik ke tengah dari atas */
+    left: 50%;             /* Tarik ke tengah dari samping */
+    transform: translate(-50%, -50%); /* Geser pas ke titik tengah */
+    background: #111;      /* Warna hitam */
+    color: #ffaa00;        /* Warna teks kuning */
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+    z-index: 99999;        /* Selalu berada di lapisan paling atas */
+    border: 1.5px solid #ffaa00;
+    white-space: nowrap;   /* Teks tetap satu baris */
+}
+    
+    
     /* Styling Modal Pop-up Iklan */
     .popup-overlay {
         position: fixed;
@@ -574,6 +594,13 @@
   </a>
 
 </body>
+
+<!-- KOTAK UPDATE MENGAMBANG -->
+<div class="floating-update-box">
+    UPDATE TGL-30-10-2026-JAM 15:00WIB
+</div>
+  
+  
 </html>
 
 DEV:VPUTRA.ID
