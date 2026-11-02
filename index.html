@@ -3,117 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>web vputra store all games</title>
+  <title>vputra store</title>
   <meta name="google-site-verification" content="googleb51ebc79c924710a.html" />
   
   <style>
-
-/* Styling Kotak Benar-benar di Tengah Layar */
-.floating-update-box {
-    position: fixed;
-    top: 50%;              /* Tarik ke tengah dari atas */
-    left: 50%;             /* Tarik ke tengah dari samping */
-    transform: translate(-50%, -50%); /* Geser pas ke titik tengah */
-    background: #111;      /* Warna hitam */
-    color: #ffaa00;        /* Warna teks kuning */
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: bold;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.7);
-    z-index: 99999;        /* Selalu berada di lapisan paling atas */
-    border: 1.5px solid #ffaa00;
-    white-space: nowrap;   /* Teks tetap satu baris */
+.trending-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0 10px 0;
 }
+
+.transaksi-kanan {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
     
-    
-    /* Styling Modal Pop-up Iklan */
-    .popup-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
+    /* Styling Kotak Persegi Panjang Sosmed di Kanan Atas */
+    .sosmed-container-box {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 999999;
+        flex-direction: column;
+        gap: 6px;
     }
 
-    .popup-content {
-        background: #111;
-        padding: 10px;
-        border-radius: 12px;
-        max-width: 90%;
-        width: 350px;
-        position: relative;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-        text-align: center;
-    }
-
-    .popup-img {
-        width: 100%;
-        border-radius: 8px;
-        display: block;
-    }
-
-    /* Tombol Silang (X) */
-    .popup-close-btn {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background: rgba(0, 0, 0, 0.7);
-        color: #ffffff;
-        border: 2px solid #ffffff;
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        font-size: 22px;
-        font-weight: bold;
+    .sosmed-box-item {
+        background-color: #ffffff;
+        border: 2px solid #1b52e8;
+        border-radius: 10px;
         display: flex;
         align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 1000000;
+        padding: 6px 10px;
+        text-decoration: none;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        transition: transform 0.15s ease;
     }
-    
-    /* Kotak Teks Penjelas (Label) di Samping Tombol Discord */
-    .discord-tooltip {
-        position: fixed;
-        bottom: 102px;
-        right: 85px;
-        z-index: 9998;
-        background-color: #111;
-        color: #fff;
-        padding: 6px 12px;
-        border-radius: 8px;
+    .sosmed-box-item:active { transform: scale(0.95); }
+
+    .sosmed-box-icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+        object-fit: cover;
+        margin-right: 8px;
+        flex-shrink: 0;
+    }
+
+    .sosmed-box-text {
         font-size: 0.75rem;
-        font-weight: 700;
+        font-weight: 800;
+        color: #111;
         white-space: nowrap;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        pointer-events: none;
     }
+    
+    :root { --primary-blue: #1b52e8; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+    body { background-color: #ffffff; color: #333; padding-bottom: 60px; }
+    .container { max-width: 900px; margin: 0 auto; padding: 15px; }
 
-    .discord-tooltip::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        right: -5px;
-        transform: translateY(-50%);
-        border-width: 5px 0 5px 5px;
-        border-style: solid;
-        border-color: transparent transparent transparent #111;
-    }
-
-    /* Styling Search Bar Floating ala TikTok */
-    .sticky-search-container {
+    /* Header Atas: Pencarian & Sosmed Sejajar */
+    .top-header-container {
         position: sticky;
-        top: 10px;
+        top: 0;
         z-index: 999;
-        padding: 0 10px;
-        margin-bottom: 15px;
+        background-color: #ffffff;
+        padding: 10px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
+
+    .sticky-search-container { flex: 1; }
 
     .search-box-tiktok {
         display: flex;
@@ -121,15 +88,14 @@
         background-color: #f1f2f5;
         border-radius: 25px;
         padding: 8px 16px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        border: 2px solid #1b52e8;
+        border: 2px solid var(--primary-blue);
     }
 
     .search-box-tiktok svg {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
         fill: #666;
-        margin-right: 10px;
+        margin-right: 8px;
         flex-shrink: 0;
     }
 
@@ -138,132 +104,85 @@
         background: transparent;
         outline: none;
         width: 100%;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         color: #222;
         font-weight: 600;
     }
 
-    .search-input-tiktok::placeholder {
-        color: #888;
-        font-weight: 400;
-    }
-    
-    /* Gaya Tombol Mengambang Panah Scroll ke Bawah */
-    .floating-scroll-btn {
-        position: fixed;
-        bottom: 155px;
-        right: 25px;
-        z-index: 9998;
-        background-color: #1b52e8;
-        color: white;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 15px rgba(27, 82, 232, 0.4);
-        text-decoration: none;
-        cursor: pointer;
-        transition: transform 0.2s ease;
-    }
-    .floating-scroll-btn:active { transform: scale(0.92); }
-    .floating-scroll-btn svg {
-        width: 24px;
-        height: 24px;
-        fill: currentColor;
-        animation: bounceDown 1.5s infinite;
-    }
-
-    @keyframes bounceDown {
-        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-        40% { transform: translateY(4px); }
-        60% { transform: translateY(2px); }
-    }
-
-    /* Gaya Tombol Mengambang Join Discord */
-    .floating-discord-btn {
-        position: fixed;
-        bottom: 90px;
-        right: 25px;
-        z-index: 9998;
-        background-color: #5865F2;
-        color: white;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
-        text-decoration: none;
-        cursor: pointer;
-        transition: transform 0.2s ease;
-    }
-    .floating-discord-btn:active { transform: scale(0.92); }
-    .floating-discord-btn svg {
-        width: 26px;
-        height: 26px;
-        fill: currentColor;
-    }
-
-    /* Gaya Tombol Mengambang Bantuan */
-    .floating-help-btn {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        z-index: 9999;
-        background-color: #1b52e8;
-        color: white;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 12px 18px;
-        border-radius: 50px;
-        box-shadow: 0 4px 15px rgba(27, 82, 232, 0.4);
-        text-decoration: none;
-        font-weight: 700;
-        font-size: 0.95rem;
-    }
-    .floating-help-btn:active { transform: scale(0.95); }
-    .floating-help-btn svg { width: 22px; height: 22px; fill: currentColor; }
-
-    :root { --primary-blue: #1b52e8; }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
-    body { background-color: #ffffff; color: #333; padding-bottom: 40px; }
-    .container { max-width: 900px; margin: 0 auto; padding: 15px; }
-
     .banner-jual {
       background: linear-gradient(135deg, #1b52e8, #0b2f91);
-      color: #fff; text-align: center; padding: 18px 15px;
-      border-radius: 12px; font-weight: 800; font-size: 1.1rem;
-      text-decoration: none; display: block; margin-bottom: 20px;
+      color: #fff; text-align: center; padding: 15px;
+      border-radius: 12px; font-weight: 800; font-size: 1rem;
+      text-decoration: none; display: block; margin-top: 10px; margin-bottom: 20px;
       box-shadow: 0 4px 15px rgba(27, 82, 232, 0.3); text-transform: uppercase;
     }
 
     .section-title { 
       font-weight: 900; 
-      font-size: 1.05rem; 
+      font-size: 1rem; 
       text-transform: uppercase;
       margin-top: 25px; 
       margin-bottom: 12px; 
       color: #111; 
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-    @media (min-width: 650px) { .card-grid { grid-template-columns: repeat(3, 1fr); } }
-
-    .game-card {
-      background-color: var(--primary-blue); border-radius: 14px;
-      overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); cursor: pointer;
+    /* DESAIN DESKRIPSI LAYOUT MEMANJANG (PERSEKAT / HORIZONTAL CARD) */
+    .list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
-    .image-wrapper { position: relative; width: 100%; padding-top: 100%; background: #eee; }
-    .image-wrapper img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-    .card-title-box { background-color: var(--primary-blue); color: white; text-align: center; padding: 12px 8px; font-weight: 800; font-size: 0.95rem; text-transform: uppercase; }
 
-    /* Popup Modal Sub-Menu Produk */
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 999; padding: 20px; }
-    .modal-box { background: #fff; padding: 25px 20px; border-radius: 16px; text-align: center; max-width: 380px; width: 100%; max-height: 85vh; overflow-y: auto; }
+    .horizontal-card {
+      background-color: #ffffff;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      padding: 10px 14px;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .horizontal-card:hover {
+      border-color: var(--primary-blue);
+    }
+
+    .horizontal-card:active {
+      transform: scale(0.98);
+      background-color: #f8fafc;
+    }
+
+    .horizontal-img-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #eee;
+      margin-right: 15px;
+    }
+
+    .horizontal-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .horizontal-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #1a202c;
+      text-transform: uppercase;
+    }
+
+    /* Modal Pop-up Sub-Menu & Detail Akun */
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
+    .modal-box { background: #fff; padding: 25px 20px; border-radius: 16px; text-align: center; max-width: 400px; width: 100%; max-height: 85vh; overflow-y: auto; }
     .modal-box h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 15px; color: #111; line-height: 1.4; }
     
     .submenu-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
@@ -274,135 +193,356 @@
       border: 1.5px solid #dcdde1; transition: all 0.2s;
     }
     .submenu-item:hover { background-color: var(--primary-blue); color: #fff; border-color: var(--primary-blue); }
+
+    /* Galeri Foto Detail Akun (Max 10 Gambar) */
+    .account-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 15px;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+    .account-gallery img {
+      width: 100%;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .btn-minat {
+      background-color: #22c55e;
+      color: white;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: 800;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+    }
+    .btn-minat:active { transform: scale(0.95); }
+
     .btn-popup-cancel { background: #e0e0e0; color: #333; border: none; padding: 10px; border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; }
+
+    /* Pop-up Iklan */
+    .popup-overlay-iklan { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center; z-index: 999999; }
+    .popup-content-iklan { background: #111; padding: 10px; border-radius: 12px; max-width: 90%; width: 350px; position: relative; text-align: center; }
+    .popup-img { width: 100%; border-radius: 8px; display: block; }
+    .popup-close-btn { position: absolute; top: 15px; right: 15px; background: rgba(0, 0, 0, 0.7); color: #ffffff; border: 2px solid #ffffff; width: 38px; height: 38px; border-radius: 50%; font-size: 22px; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1000000; }
+
+    /* Floating Navigation Buttons */
+    .floating-scroll-btn {
+        position: fixed; bottom: 155px; right: 25px; z-index: 9998;
+        background-color: var(--primary-blue); color: white; width: 46px; height: 46px;
+        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 4px 15px rgba(27, 82, 232, 0.4); text-decoration: none; cursor: pointer;
+    }
+    .floating-scroll-btn svg { width: 24px; height: 24px; fill: currentColor; }
+
+    .floating-discord-btn {
+        position: fixed; bottom: 95px; right: 25px; z-index: 9998;
+        background-color: #5865F2; color: white; width: 46px; height: 46px;
+        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4); text-decoration: none; cursor: pointer;
+    }
+    .floating-discord-btn svg { width: 24px; height: 24px; fill: currentColor; }
+
+    .discord-tooltip {
+        position: fixed; bottom: 107px; right: 80px; z-index: 9998;
+        background-color: #111; color: #fff; padding: 6px 12px;
+        border-radius: 8px; font-size: 0.75rem; font-weight: 700; white-space: nowrap; pointer-events: none;
+    }
+
+    /* Tombol Bantuan Mengambang Gambar Karakter Telinga Kucing */
+    .floating-help-container {
+        position: fixed; bottom: 15px; right: 15px; z-index: 9999;
+        display: flex; align-items: center; gap: 6px; text-decoration: none; cursor: pointer;
+    }
+    .floating-help-bubble {
+        background-color: var(--primary-blue); color: white; padding: 6px 12px;
+        border-radius: 18px; font-weight: 800; font-size: 0.8rem;
+        box-shadow: 0 4px 12px rgba(27, 82, 232, 0.3);
+    }
+    .floating-help-avatar {
+        width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--primary-blue);
+        object-fit: cover; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- Kotak Pencarian Sticky ala TikTok -->
-  <div class="sticky-search-container">
-      <div class="search-box-tiktok">
-          <svg viewBox="0 0 24 24">
-              <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-          </svg>
-          <input type="text" id="searchInput" class="search-input-tiktok" placeholder="Cari produk (contoh: Roblox,FREE FIRE,REDFINGER,ML,FF,DLL)..." onkeyup="filterProduk()">
+  <!-- Header Atas: Pencarian & Sosmed Sejajar -->
+  <div class="top-header-container">
+      <div class="sticky-search-container">
+          <div class="search-box-tiktok">
+              <svg viewBox="0 0 24 24">
+                  <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+              </svg>
+              <input type="text" id="searchInput" class="search-input-tiktok" placeholder="Cari produk (Roblox, FF, ML, Redfinger)..." onkeyup="filterProduk()">
+          </div>
+      </div>
+      <div class="sosmed-container-box">
+          <a href="https://tiktok.com/@vputra_01" target="_blank" class="sosmed-box-item">
+              <img src="IMG_15810c4d-b17d-4aa8-aed6-d3f0ca211673.png" alt="TikTok" class="sosmed-box-icon" onerror="this.src='https://via.placeholder.com/24?text=TK'">
+              <span class="sosmed-box-text">vputra_01</span>
+          </a>
+          <a href="https://www.youtube.com/@VPUTRA_01" target="_blank" class="sosmed-box-item">
+              <img src="Youtube_logo.png" alt="YouTube" class="sosmed-box-icon" onerror="this.src='https://via.placeholder.com/24?text=YT'">
+              <span class="sosmed-box-text">VPUTRA_01</span>
+          </a>
       </div>
   </div>
 
   <div class="container">
+    
+<!-- Bagian Header Top Trending dan Kotak Transaksi -->
+<div class="trending-header">
+  <div class="section-title" style="margin: 0;">🔥 TOP TRENDING</div>
+  <div class="transaksi-kanan">
+    💰 TRANSAKSI SUKSES = <span id="jumlah-transaksi">0</span>
+  </div>
+</div>
+
+<!-- INI YANG HARUS ADA DI BAWAHNYA SUPAYA PRODUK MUNCUL LAGI -->
+<div class="list-container" id="containerTrending"></div>
+
+
+
+
+    
     <a href="javascript:void(0)" class="banner-jual">
-      KEBUTUHAN GAME by VPUTRA STORE
+      KEBUTUHAN ALL GAMES by VPUTRA STORE
     </a>
 
-    <div class="section-title"><span>$</span> JUAL AKUN DI BAWAH!</div>
-    <div class="card-grid" id="gridBagian1"></div>
+    <!-- CLOUD PHONE -->
+    <div class="section-title">📱 CLOUD PHONE</div>
+    <div class="list-container" id="containerCloudPhone"></div>
 
-    <div class="section-title"><span>$</span> BELI AKUN DI BAWAH!</div>
-    <div class="card-grid" id="gridBagian2"></div>
+    <div class="section-title">💲 JUAL AKUN DI BAWAH!</div>
+    <div class="list-container" id="containerBagian1"></div>
 
-    <div class="section-title"><span>$</span> JOKO DI BAWAH!</div>
-    <div class="card-grid" id="gridBagian3"></div>
+    <div class="section-title">💲 BELI AKUN DI BAWAH!</div>
+    <div class="list-container" id="containerBagian2"></div>
 
-    <div class="section-title"><span>$</span> BELI ITEM GAME DI BAWAH!</div>
-    <div class="card-grid" id="gridBagian4"></div>
+    <div class="section-title">💲 JOKO DI BAWAH!</div>
+    <div class="list-container" id="containerBagian3"></div>
 
-    <div class="section-title"><span>$</span> BELI GAMMEPASS DI BAWAH!</div>
-    <div class="card-grid" id="gridBagian5"></div>
+    <div class="section-title">💲 BELI ITEM GAME DI BAWAH!</div>
+    <div class="list-container" id="containerBagian4"></div>
 
-    <div class="section-title"><span>$</span> TOP UP ALL GAMES!</div>
-    <div class="card-grid" id="gridBagian6"></div>
-    
-<div class="section-title"><span>$</span> VOUCHER/CLOUD PHONE!</div>
-    <div class="card-grid" id="gridBagian7"></div>
+    <div class="section-title">💲 BELI GAMEPASS DI BAWAH!</div>
+    <div class="list-container" id="containerBagian5"></div>
+
+    <div class="section-title">💎 TOP UP GAME!</div>
+    <div class="list-container" id="containerBagian6"></div>
     
   </div>
 
-  <!-- Pop-up Modal Sub-Menu Produk -->
+  <!-- Modal Pop-up Sub-Menu / Detail Akun -->
   <div class="modal-overlay" id="productModal">
     <div class="modal-box">
       <h3 id="popupTitle">PILIH VARIAN / MAP</h3>
       <div class="submenu-list" id="submenuContainer"></div>
+      <div id="accountDetailContainer" style="display: none;"></div>
       <button class="btn-popup-cancel" onclick="tutupPopupProduk()">Tutup</button>
     </div>
   </div>
 
-  <!-- STRUKTUR POP-UP IKLAN DI DALAM BODY (PALING BAWAH) -->
-  <div id="popupIklan" class="popup-overlay">
-    <div class="popup-content">
+  <!-- Pop-up Iklan -->
+  <div id="popupIklan" class="popup-overlay-iklan">
+    <div class="popup-content-iklan">
         <button class="popup-close-btn" onclick="tutupIklan()">&times;</button>
         <img src="./inpo.jpg" alt="Iklan" class="popup-img">
     </div>
   </div>
 
   <script>
-    const DISCORD_SERVER_LINK = "https://discord.gg/6rCJ4pSB6";
+    // DATA PERSEKATAN PRODUK (Bisa diubah/ditambah/dihapus dengan mudah)
+    const dataTrending = [
+      { nama: "DRAG DRIVE SIMULATOR RBL", gambar: "dds.jpg"},
+      { nama: "REDFINGER", gambar: "rf.jpg"},
+      { nama: "TOP UP ROBUX", gambar: "rbx.jpg"}
+    ];
+
+    const dataCloudPhone = [
+      { nama: "REDFINGER", gambar: "rf.jpg" },
+      { nama: "VMOS CLOUD", gambar: "v.jpg" },
+      { nama: "VSPHONE", gambar: "vs.jpg" }
+    ];
+
+    const dataBagian1 = [
+      { nama: "JUAL AKUN FF(TIDAK TERSEDIA)", gambar: "ff.jpg" },
+      { nama: "JUAL AKUN ROBLOX(TIDAK TERSEDIA)", gambar: "rosblok.jpg" }
+    ];
+
+    const dataBagian2 = [
+      { nama: "BELI AKUN FF(TIDAK TERSEDIA)", gambar: "ff.jpg" },
+      { nama: "BELI AKUN ROBLOX(TIDAK TERSEDIA)", gambar: "rosblok.jpg" }
+    ];
+
+    const dataBagian3 = [
+      { nama: "ROBLOX JOKO ALL MAP", gambar: "rosblok.jpg" }
+    ];
+
+    const dataBagian4 = [
+      { nama: "ROBLOX ITEM ALL MAP", gambar: "rosblok.jpg" }
+    ];
+
+    const dataBagian5 = [
+      { nama: "DRAG DRIVE SIMULATOR RBL", gambar: "dds.jpg" }
+    ];
+
+    const dataBagian6 = [
+      { nama: "TOP UP DM FF", gambar: "ff.jpg" },
+      { nama: "TOP UP DM ML", gambar: "ml.jpg" },
+      { nama: "TOP UP ROBUX", gambar: "rbx.jpg"}
+    ];
 
     const daftarSubMenuDefault = [
       { nama: "KATEGORI/PRODUK TIDAK TERSEDIA ATAU SEDANG DALAM TAHAP MODERASI", link: "" },
     ];
     
-    const customSubMenuProduk = {
+    // PENGATURAN ISI VARIAN & FITUR DETAIL AKUN / ITEM BERSTRUKTUR CABANG
+        const customSubMenuProduk = {
+      // Ubah bagian Jual & Beli Akun menjadi Tidak Tersedia
+      "JUAL AKUN FF": [
+        { nama: "KATEGORI/PRODUK TIDAK TERSEDIA ATAU SEDANG DALAM TAHAP MODERASI", link: "" }
+      ],
+      "JUAL AKUN ROBLOX": [
+        { nama: "KATEGORI/PRODUK TIDAK TERSEDIA ATAU SEDANG DALAM TAHAP MODERASI", link: "" }
+      ],
+      "BELI AKUN FF": [
+        { nama: "KATEGORI/PRODUK TIDAK TERSEDIA ATAU SEDANG DALAM TAHAP MODERASI", link: "" }
+      ],
+      "BELI AKUN ROBLOX": [
+        { nama: "KATEGORI/PRODUK TIDAK TERSEDIA ATAU SEDANG DALAM TAHAP MODERASI", link: "" }
+      ],
+
+      // 2. Contoh Sistem Cabang Joko & Item (Misal Fish It -> Ikan Secret Tumbal)
       "ROBLOX JOKO ALL MAP": [
-        { nama: "STEAL AN EGG", link: "https://discord.gg/sQVJTATwv" },
-        { nama: "FISH IT", link: "https://discord.gg/umJm3fgAA" }
+        { 
+          tipe: "menu", 
+          nama: "FISH IT", 
+          subItems: [
+            { nama: "JOKO AFK 1 JAM = 200P", link: "https://discord.gg/umJm3fgAA" },
+            { nama: "JOKO AFK 24 JAM = 3K", link: "https://discord.gg/umJm3fgAA" },
+            { nama: "JOKO GET GHOFIND ROD = 35K", link: "https://discord.gg/umJm3fgAA" },
+            { nama: "JOKO GET ELEMENT ROD = 55K", link: "https://discord.gg/umJm3fgAA" },
+            { nama: "JOKO GET DIAMOND ROD = 100K", link: "https://discord.gg/umJm3fgAA" }
+          ] 
+        },
+        { 
+          tipe: "menu", 
+          nama: "STEAL AN EGG", 
+          subItems: [
+            { nama: "JOKO AFK 1 JAM = 200P", link: "https://discord.gg/sQVJTATwv" },
+            { nama: "JOKO AFK 24 JAM = 3K", link: "https://discord.gg/sQVJTATwv" },
+            { nama: "JOKO GET 1 SECRET EGG = 500P", link: "https://discord.gg/sQVJTATwv" },
+            { nama: "JOKO GET 1 ETERNAL EGG = 1K", link: "https://discord.gg/sQVJTATwv" },
+            { nama: "JOKO GET 1 DEVINE EGG = 1,5K", link: "https://discord.gg/sQVJTATwv" }
+          ] 
+        }
       ],
       "ROBLOX ITEM ALL MAP": [
-        { nama: "FISH IT", link: "https://discord.gg/vh2TXYJCr" },
+        { 
+          tipe: "menu", 
+          nama: "FISH IT", 
+          subItems: [
+            { nama: " SECRET TUMBAL = 1K", link: "https://discord.gg/vh2TXYJCr" }
+          ] 
+        }
       ],
-      "REDFINGER(VIA CODE/OTORISASI": [
-        { nama: "VIP - 7 HARI=20K", link:"https://discord.gg/yEsCPZFxh"},
-        { nama: "VIP - 30 HARI=60K", link:"https://discord.gg/yEsCPZFxh"},
-        { nama: "VIP(OTORISASI) - 1 HARI=2,5K", link:"https://discord.gg/yEsCPZFxh"},
-        { nama: "KVIP - 7 HARI=37K", link:"https://discord.gg/yEsCPZFxh"},
-        { nama: "KVIP - 30 HARI=101K", link:"https://discord.gg/yEsCPZFxh"},
-        { nama: "SVIP - 7 HARI=47K", link:"https://discord.gg/yEsCPZFxh"},
-        { nama: "SVIP - 30 HARI=131K", link:"https://discord.gg/yEsCPZFxh"},
-        { nama: "XVIP - 7 HARI=104K", link:"https://discord.gg/yEsCPZFxh"},
-        { nama: "XVIP - 30 HARI=335K", link:"https://discord.gg/yEsCPZFxh"},
+      "TOP UP ROBUX": [
+            {
+              tipe: "menu",
+              nama: "ROBUX VIA GAMEPASS 5-7H",
+              subItems: [
+                { nama: "1 ROBUX = 180P", link:"https://discord.gg/A82x4D7Rq"},
+                { nama: "25 ROBUX = 4,3K", link:"https://discord.gg/A82x4D7Rq"},
+                  { nama: "50 ROBUX = 8,7K", link:"https://discord.gg/A82x4D7Rq"},
+                { nama: "100 ROBUX = 17K", link:"https://discord.gg/A82x4D7Rq"},
+              ]
+            },
+        {
+              tipe: "menu",
+              nama: "ROBUX VIA USERNAME(akun harus 18+)",
+              subItems: [
+                { nama: "100 ROBUX = 17K", link:"https://discord.gg/A82x4D7Rq"},
+                { nama: "200 ROBUX = 33K", link:"https://discord.gg/A82x4D7Rq"},
+                { nama: "300 ROBUX = 50K", link:"https://discord.gg/A82x4D7Rq"},
+                { nama: "400 ROBUX = 65K", link:"https://discord.gg/A82x4D7Rq"},
+                { nama: "500 ROBUX = 79K", link:"https://discord.gg/A82x4D7Rq"}
+              ]
+        },
+        {
+          tipe: "menu",
+              nama: "ROBUX VIA LOGIN",
+              subItems: [
+                { nama: "80 ROBUX = 18K", link:"https://discord.gg/A82x4D7Rq"},
+                { nama: "400 ROBUX = 80K", link:"https://discord.gg/A82x4D7Rq"},
+                { nama: "500 ROBUX = 82K", link:"https://discord.gg/A82x4D7Rq"},
+                { nama: "800 ROBUX = 148K", link:"https://discord.gg/A82x4D7Rq"},
+                { nama: "1000 ROBUX = 163K", link:"https://discord.gg/A82x4D7Rq"}
+                ]
+        }
+          ],
+
+      // Data produk lainnya tetap rapi seperti biasa
+      "REDFINGER": [
+        { nama: "VIP - 7 HARI = 20K", link:"https://discord.gg/yEsCPZFxh"},
+        { nama: "VIP - 30 HARI = 60K", link:"https://discord.gg/yEsCPZFxh"},
+        { nama: "VIP(OTORISASI) - 1 HARI = 2,5K", link:"https://discord.gg/yEsCPZFxh"},
+        { nama: "KVIP - 7 HARI = 37K", link:"https://discord.gg/yEsCPZFxh"},
+        { nama: "KVIP - 30 HARI = 101K", link:"https://discord.gg/yEsCPZFxh"},
+        { nama: "SVIP - 7 HARI = 47K", link:"https://discord.gg/yEsCPZFxh"},
+        { nama: "SVIP - 30 HARI = 131K", link:"https://discord.gg/yEsCPZFxh"},
+        { nama: "XVIP - 7 HARI = 104K", link:"https://discord.gg/yEsCPZFxh"},
+        { nama: "XVIP - 30 HARI = 335K", link:"https://discord.gg/yEsCPZFxh"},
+      ],
+            "VMOS CLOUD": [
+        { nama: "V08 - 1 HARI = 6K", link: "https://discord.gg/FvraDS43D" },
+        { nama: "V08 - 30 HARI = 77K", link: "https://discord.gg/FvraDS43D" },
+        { nama: "V06 - 1 HARI = 7,5K", link: "https://discord.gg/FvraDS43D" },
+        { nama: "V06 - 30 HARI = 95K", link: "https://discord.gg/FvraDS43D" },
+      ],
+      "VSPHONE": [
+        { nama: "BASIC - 1 HARI = 4K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "BASIC - 7 HARI = 14K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "BASIC - 30 HARI = 60K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "VIP - 1 HARI = 5K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "VIP - 7 HARI = 16K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "VIP - 30 HARI = 60K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "KVIP - 1 HARI = 8K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "KVIP - 7 HARI = 21K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "KVIP - 30 HARI = 75K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "SVIP - 1 HARI = 8K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "SVIP - 7 HARI = 42K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "SVIP - 30 HARI = 106,5K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "XVIP - 1 HARI = 12K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "XVIP - 7 HARI = 66,5K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "XVIP - 30 HARI = 169K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "MVIP - 1 HARI = 32K", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "MVIP - 7 HARI = tidak tersedia", link: "https://discord.gg/dR9bVv3nB" },
+        { nama: "MVIP - 30 HARI = 402K", link: "https://discord.gg/dR9bVv3nB" },
       ],
       "DRAG DRIVE SIMULATOR RBL": [
-        { nama: "CUSTOM PLATE PASS - 10K", link: "https://discord.gg/jvzY4EKfX" },
-        { nama: "2X PAYCHECK - 60K", link: "https://discord.gg/jvzY4EKfX" },
-        { nama: "ADVANCE PAINT PASS - 8,5K", link: "https://discord.gg/jvzY4EKfX" },
-        { nama: "DRAGSPEC PASS - 14K", link: "https://discord.gg/jvzY4EKfX" },
-        { nama: "LUXURY PASS - 14,5K", link: "https://discord.gg/jvzY4EKfX" },
-        { nama: "POLICE PASS - 18K", link: "https://discord.gg/jvzY4EKfX" },
-        { nama: "BOOMBOX RADIO - 4,5K", link: "https://discord.gg/jvzY4EKfX" },
-        { nama: "SUSPENSION PRO PASS - 4,5K", link: "https://discord.gg/jvzY4EKfX" },
-        { nama: "EXCLUSIVE RIMS PASS - 12K", link: "https://discord.gg/jvzY4EKfX" },
-        { nama: "SLOT EXPANSION PASS - 15K", link: "https://discord.gg/jvzY4EKfX" },
-        { nama: "PREMIUM ACCESSORIES PASS - 9K", link: "https://discord.gg/jvzY4EKfX" },
-        { nama: "SLOT LIMIT UNLOCK PASS - 13K", link: "https://discord.gg/jvzY4EKfX" }
+        { nama: "CUSTOM PLATE PASS = 10K", link: "https://discord.gg/jvzY4EKfX" },
+        { nama: "2X PAYCHECK = 60K", link: "https://discord.gg/jvzY4EKfX" },
+        { nama: "ADVANCE PAINT PASS = 8,5K", link: "https://discord.gg/jvzY4EKfX" },
+        { nama: "DRAGSPEC PASS = 14K", link: "https://discord.gg/jvzY4EKfX" },
+        { nama: "LUXURY PASS = 14,5K", link: "https://discord.gg/jvzY4EKfX" },
+        { nama: "POLICE PASS = 18K", link: "https://discord.gg/jvzY4EKfX" },
+        { nama: "BOOMBOX RADIO = 4,5K", link: "https://discord.gg/jvzY4EKfX" },
+        { nama: "SUSPENSION PRO PASS = 4,5K", link: "https://discord.gg/jvzY4EKfX" },
+        { nama: "EXCLUSIVE RIMS PASS = 12K", link: "https://discord.gg/jvzY4EKfX" },
+        { nama: "SLOT EXPANSION PASS = 15K", link: "https://discord.gg/jvzY4EKfX" },
+        { nama: "PREMIUM ACCESSORIES PASS = 9K", link: "https://discord.gg/jvzY4EKfX" },
+        { nama: "SLOT LIMIT UNLOCK PASS = 13K", link: "https://discord.gg/jvzY4EKfX" }
       ],
-      "VMOS(VIA CODE)": [
-      {nama: "V08 - 1 - HARI=6K",link:"https://discord.gg/dR9bVv3nB"},
-      {nama: "V08 - 30 - HARI=77K",link:"https://discord.gg/dR9bVv3nB"},
-      {nama: "V06 - 1 - HARI=7,5K",link:"https://discord.gg/dR9bVv3nB"},
-      {nama: "V06 - 30 - HARI=95K",link:"https://discord.gg/dR9bVv3nB"},
-      ],
-      "VSPHONE(VIA CODE)": [
-      {nama: "BASIC - 1 - HARI=4K",link:"https://discord.gg/FvraDS43D"},
-      {nama: "BASIC - 7 - HARI=14K",link:"https://discord.gg/FvraDS43D"},
-      {nama: "BASIC - 30 - HARI=60K",link:"https://discord.gg/FvraDS43D"},
-{nama: "VIP - 1 - HARI=5K",link:"https://discord.gg/FvraDS43D"},
-{nama: "VIP - 7 - HARI=16K",link:"https://discord.gg/FvraDS43D"},
-{nama: "VIP - 30 - HARI=60K",link:"https://discord.gg/FvraDS43D"},
-{nama: "KVIP - 1 - HARI=8K",link:"https://discord.gg/FvraDS43D"},
-{nama: "KVIP - 7 - HARI=21K",link:"https://discord.gg/FvraDS43D"},
-{nama: "KVIP - 30 - HARI=75K",link:"https://discord.gg/FvraDS43D"},
-{nama: "SVIP - 1 - HARI=8K",link:"https://discord.gg/FvraDS43D"},
-{nama: "SVIP - 7 - HARI=42K",link:"https://discord.gg/FvraDS43D"},
-{nama: "SVIP - 30 - HARI=106,5K",link:"https://discord.gg/FvraDS43D"},
-{nama: "XVIP - 1 - HARI=12K",link:"https://discord.gg/FvraDS43D"},
-        {nama: "XVIP - 7 - HARI=66,5K",link:"https://discord.gg/FvraDS43D"},
-     {nama: "XVIP - 30 - HARI=169K",link:"https://discord.gg/FvraDS43D"},
-      {nama: "MVIP - 1 - HARI=32K",link:"https://discord.gg/FvraDS43D"},
-      {nama: "MVIP - 7 - HARI=tidak tersedia",link:"https://discord.gg/FvraDS43D"},
-      {nama: "MVIP - 30 - HARI=402K",link:"https://discord.gg/FvraDS43D"},
-      ],
-            // Tambahan untuk Mobile Legends (ml.jpg)
-              "TOP UP DM ML": [
+      "TOP UP DM ML": [
         { nama: "WEEKLY DIAMOND PASS (WDP) = 33K", link: "https://discord.gg/hRHh3StNg" },
         { nama: "3 DIAMONDS = 3K", link: "https://discord.gg/hRHh3StNg" },
         { nama: "5 DIAMONDS = 2K", link: "https://discord.gg/hRHh3StNg" },
@@ -423,9 +563,8 @@
         { nama: "568 DIAMONDS = 165K", link: "https://discord.gg/hRHh3StNg" },
         { nama: "966 DIAMONDS = 280K", link: "https://discord.gg/hRHh3StNg" },
         { nama: "2010 DIAMONDS = 550K", link: "https://discord.gg/hRHh3StNg" }
-    ],
-
-"TOP UP DM FF": [
+      ],
+            "TOP UP DM FF": [
         { nama: "MEMBER MINGGUAN = 28K", link: "https://discord.gg/P9ezF5grG" },
         { nama: "MEMBER BULANAN = 84K", link: "https://discord.gg/P9ezF5grG" },
         { nama: "BOOYAH PASS = 43K", link: "https://discord.gg/P9ezF5grG" },
@@ -450,105 +589,142 @@
         { nama: "720 DIAMONDS = 94K", link: "https://discord.gg/P9ezF5grG" },
         { nama: "1075 DIAMONDS = 135K", link: "https://discord.gg/P9ezF5grG" },
         { nama: "1080 DIAMONDS = 140K", link: "https://discord.gg/P9ezF5grG" }
-    ]
-
+      ]
     };
 
-    const dataBagian1 = [
-      { nama: "TIDAK TERSEDIA", gambar: "ff.jpg" },
-      { nama: "TIDAK TERSEDIA", gambar: "rosblok.jpg" }
-    ];
+    function renderList(dataArray, elementId) {
+      const container = document.getElementById(elementId);
+      if(!container) return;
+      container.innerHTML = '';
+      dataArray.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'horizontal-card';
+        card.onclick = function() { bukaPopup(item.nama); };
+        card.innerHTML = `
+          <div class="horizontal-img-box">
+            <img src="${item.gambar}" alt="${item.nama}" onerror="this.src='https://via.placeholder.com/150?text=VPUTRA'">
+          </div>
+          <div class="horizontal-title">${item.nama}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
 
-    const dataBagian2 = [
-      { nama: "TIDAK TERSEDIA", gambar: "ff.jpg" },
-      { nama: "TIDAK TERSEDIA", gambar: "rosblok.jpg" }
-    ];
-
-    const dataBagian3 = [
-      { nama: "ROBLOX JOKO ALL MAP", gambar: "rosblok.jpg" }
-    ];
-
-    const dataBagian4 = [
-      { nama: "ROBLOX ITEM ALL MAP", gambar: "rosblok.jpg" }
-    ];
-
-    const dataBagian5 = [
-      { nama: "DRAG DRIVE SIMULATOR RBL", gambar: "dds.jpg" }
-    ];
-    
-    const dataBagian6 = [
-      { nama: "TOP UP DM FF", gambar: "ff.jpg"},
-      { nama: "TOP UP DM ML", gambar: "ml.jpg"}
-    ];
-
-    const dataBagian7 = [
-      { nama: "REDFINGER(VIA CODE/OTORISASI", gambar: "rf.jpg" },
-      { nama: "VMOS(VIA CODE)", gambar: "v.jpg"},
-      { nama: "VSPHONE(VIA CODE)", gambar: "vs.jpg"}
-    ]
-
-    // Fungsi Pop-up Produk
+    // Fungsi Pop-up Utama & Logika Cabang Menu / Akun
     function bukaPopup(namaProduk) {
+      document.getElementById('popupTitleinnerText = "PILIH VARIAN:\n" + namaProduk;');
       document.getElementById('popupTitle').innerText = "PILIH VARIAN:\n" + namaProduk;
       const container = document.getElementById('submenuContainer');
+      const detailContainer = document.getElementById('accountDetailContainer');
       container.innerHTML = '';
+      detailContainer.innerHTML = '';
+      detailContainer.style.display = 'none';
+      container.style.display = 'flex';
 
       let listMenu = customSubMenuProduk[namaProduk] || daftarSubMenuDefault;
 
       listMenu.forEach(item => {
         const a = document.createElement('a');
         a.className = 'submenu-item';
-        a.href = item.link;
-        a.target = '_blank';
-        a.innerHTML = `<span>📂 ${item.nama}</span> ➔`;
+        
+        // Cek jika ini adalah tipe Akun (Jual/Beli Akun dengan Galeri & Tombol Minat)
+        if(item.tipe === 'akun') {
+          a.href = "javascript:void(0)";
+          a.innerHTML = `<span>📂 ${item.nama}</span> ➔`;
+          a.onclick = function() {
+            tampilkanDetailAkun(item);
+          };
+        } 
+        // Cek jika ini adalah tipe Menu Cabang (Joko / Item Game)
+        else if(item.tipe === 'menu') {
+          a.href = "javascript:void(0)";
+          a.innerHTML = `<span>📂 ${item.nama}</span> ➔`;
+          a.onclick = function() {
+            tampilkanSubMenuCabang(item.nama, item.subItems);
+          };
+        } 
+        // Menu standar langsung link Discord
+        else {
+          a.href = item.link || "#";
+          a.target = '_blank';
+          a.innerHTML = `<span>📂 ${item.nama}</span> ➔`;
+        }
+        
         container.appendChild(a);
       });
 
       document.getElementById('productModal').style.display = 'flex'; 
+    }
+
+    // Menampilkan Sub-Menu Cabang (Contoh: Fish It -> Ikan Secret Tumbal)
+    function tampilkanSubMenuCabang(namaMenu, subItems) {
+      document.getElementById('popupTitle').innerText = " PILIH ITEM / JOKI:\n" + namaMenu;
+      const container = document.getElementById('submenuContainer');
+      container.innerHTML = '';
+
+      subItems.forEach(sub => {
+        const a = document.createElement('a');
+        a.className = 'submenu-item';
+        a.href = sub.link;
+        a.target = '_blank';
+        a.innerHTML = `<span>🛒 ${sub.nama}</span> ➔`;
+        container.appendChild(a);
+      });
+    }
+
+    // Menampilkan Detail Akun, Galeri Foto (Max 10), dan Tombol Minat
+    function tampilkanDetailAkun(akun) {
+      document.getElementById('popupTitle').innerText = akun.nama;
+      const container = document.getElementById('submenuContainer');
+      const detailContainer = document.getElementById('accountDetailContainer');
+      
+      container.style.display = 'none';
+      detailContainer.style.display = 'block';
+
+      let galeriHTML = '<div class="account-gallery">';
+      if(akun.gambarList && akun.gambarList.length > 0) {
+        akun.gambarList.forEach(img => {
+          galeriHTML += `<img src="${img}" onerror="this.src='https://via.placeholder.com/150?text=Preview'">`;
+        });
+      } else {
+        galeriHTML += `<img src="https://via.placeholder.com/150?text=No+Image">`;
+      }
+      galeriHTML += '</div>';
+
+      detailContainer.innerHTML = `
+        ${galeriHTML}
+        <a href="${akun.link}" target="_blank" class="btn-minat">🔥 MINAT? (CHAT DISCORD)</a>
+        <button class="btn-popup-cancel" onclick="bukaPopup('${document.getElementById('popupTitle').innerText.split('\n')[1] || 'JUAL AKUN FF'}')">Kembali</button>
+      `;
     }
     
     function tutupPopupProduk() { 
       document.getElementById('productModal').style.display = 'none'; 
     }
 
-    function renderGrid(dataArray, elementId) {
-      const grid = document.getElementById(elementId);
-      if(!grid) return;
-      grid.innerHTML = '';
-      dataArray.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'game-card';
-        card.onclick = function() { bukaPopup(item.nama); };
-        card.innerHTML = `
-          <div class="image-wrapper"><img src="${item.gambar}" alt="${item.nama}" onerror="this.src='https://via.placeholder.com/300x300?text=No+Image'"></div>
-          <div class="card-title-box">${item.nama}</div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    renderGrid(dataBagian1, 'gridBagian1');
-    renderGrid(dataBagian2, 'gridBagian2');
-    renderGrid(dataBagian3, 'gridBagian3');
-    renderGrid(dataBagian4, 'gridBagian4');
-    renderGrid(dataBagian5, 'gridBagian5');
-    renderGrid(dataBagian6, 'gridBagian6');
-    renderGrid(dataBagian7, 'gridBagian7');
+    // Render Semua Bagian Sesuai Data
+    renderList(dataTrending, 'containerTrending');
+    renderList(dataCloudPhone, 'containerCloudPhone');
+    renderList(dataBagian1, 'containerBagian1');
+    renderList(dataBagian2, 'containerBagian2');
+    renderList(dataBagian3, 'containerBagian3');
+    renderList(dataBagian4, 'containerBagian4');
+    renderList(dataBagian5, 'containerBagian5');
+    renderList(dataBagian6, 'containerBagian6');
     
     function filterProduk() {
         const input = document.getElementById('searchInput').value.toLowerCase();
-        const cards = document.querySelectorAll('.game-card');
+        const cards = document.querySelectorAll('.horizontal-card');
         cards.forEach(card => {
             const text = card.textContent.toLowerCase();
             if (text.includes(input)) {
-                card.style.display = ""; 
+                card.style.display = "flex"; 
             } else {
                 card.style.display = "none"; 
             }
         });
     }
 
-    // Fungsi Khusus Tutup Iklan & Sesi Storage (Dipisah agar tidak bentrok)
     function tutupIklan() {
         const modalIklan = document.getElementById('popupIklan');
         if (modalIklan) {
@@ -557,7 +733,6 @@
         sessionStorage.setItem('iklanSudahDitutup', 'true');
     }
 
-    // Saat halaman dimuat, cek apakah iklan sudah pernah ditutup sebelumnya
     document.addEventListener('DOMContentLoaded', function() {
         if (sessionStorage.getItem('iklanSudahDitutup') === 'true') {
             const modalIklan = document.getElementById('popupIklan');
@@ -569,7 +744,7 @@
   </script>
 
   <!-- Tombol Mengambang Discord -->
-  <a href="https://discord.gg/6rCJ4pSB6" target="_blank" class="floating-discord-btn" title="Join Server Discord">
+  <a href="https://discord.gg/hRHh3StNg" target="_blank" class="floating-discord-btn" title="Join Server Discord">
       <svg viewBox="0 0 24 24">
           <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
       </svg>
@@ -582,25 +757,13 @@
       </svg>
   </a>
 
-  <!-- Teks Keterangan di Samping Tombol Discord -->
-  <div class="discord-tooltip">Join server sebelum order/jual</div>
+  <div class="discord-tooltip">order/jual via discord ya^^--></div>
 
-  <!-- Tombol Butuh Bantuan Mengambang -->
-  <a href="https://discord.com/channels/1561705532778225795/1562364128876691476" target="_blank" class="floating-help-btn">
-      <svg viewBox="0 0 24 24">
-          <path d="M12 1C6.48 1 2 5.48 2 11c0 2.21.71 4.26 1.91 5.93L2.5 21.5l4.82-1.37C9.02 21.01 10.47 21.5 12 21.5c5.52 0 10-4.48 10-10S17.52 1 12 1zm1 14.5h-2v-2h2v2zm0-4h-2V7h2v4.5z"/>
-      </svg>
-      <span>BANTUAN?</span>
+  <!-- Tombol Bantuan Mengambang Foto Karakter Telinga Kucing -->
+  <a href="https://discord.com/channels/1561705532778225795/1562364128876691476" target="_blank" class="floating-help-container">
+      <div class="floating-help-bubble">bantuan?</div>
+      <img src="./1792843187464.png" alt="Bantuan" class="floating-help-avatar">
   </a>
 
 </body>
-
-<!-- KOTAK UPDATE MENGAMBANG -->
-<div class="floating-update-box">
-   BIG UPDATE TGL-3-11-2026-JAM 15:00WIB
-</div>
-  
-  
 </html>
-
-DEV:VPUTRA.ID
