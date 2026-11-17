@@ -418,7 +418,7 @@ body {
 
     
     <a href="javascript:void(0)" class="banner-jual">
-      KEBUTUHAN ALL GAMES by VPUTRA STORE
+      DAFTAR PRODUK by VPUTRA STORE
     </a>
 
     <!-- CLOUD PHONE -->
@@ -437,11 +437,14 @@ body {
     <div class="section-title">💲 BELI ITEM GAME DI BAWAH!</div>
     <div class="list-container" id="containerBagian4"></div>
 
-    <div class="section-title">💲 BELI GAMEPASS DI BAWAH!</div>
+    <div class="section-title">💲 BELI GAMEPASS ROBLOX DI BAWAH!</div>
     <div class="list-container" id="containerBagian5"></div>
 
-    <div class="section-title">💎 TOP UP GAME!</div>
+    <div class="section-title">💲 ORDER LAUNCHER+TIMER DI BAWAH!</div>
     <div class="list-container" id="containerBagian6"></div>
+
+    <div class="section-title">💎 TOP UP GAME!</div>
+    <div class="list-container" id="containerBagian7"></div>
     
   </div>
 
@@ -459,7 +462,7 @@ body {
   <div id="popupIklan" class="popup-overlay-iklan">
     <div class="popup-content-iklan">
         <button class="popup-close-btn" onclick="tutupIklan()">&times;</button>
-        <img src="./inpo.jpg" alt="Iklan" class="popup-img">
+        <img src="./ikln.png" alt="Iklan" class="popup-img">
     </div>
   </div>
 
@@ -496,10 +499,15 @@ body {
     ];
 
     const dataBagian5 = [
-      { nama: "DRAG DRIVE SIMULATOR RBL", gambar: "dds.jpg" }
+      { nama: "DRAG DRIVE SIMULATOR", gambar: "dds.jpg" }
     ];
 
     const dataBagian6 = [
+      { nama: "LAUNCHER+TIMERS", gambar: "vp.png" }
+    ];
+
+
+    const dataBagian7 = [
       { nama: "TOP UP DM FF", gambar: "ff.jpg" },
       { nama: "TOP UP DM ML", gambar: "ml.jpg" },
       { nama: "TOP UP ROBUX", gambar: "rbx.jpg"}
@@ -622,6 +630,10 @@ body {
         { nama: "V06 - 1 HARI = 7,5K", link: "https://discord.gg/FvraDS43D" },
         { nama: "V06 - 30 HARI = 95K", link: "https://discord.gg/FvraDS43D" },
       ],
+    "LAUNCHER+TIMERS": [
+       {nama: "LAUNCHER VIP+", link: "https://discord.gg/s3yjw9KT9"},
+       {nama: "LAUNCHER(Free)", link: "https://discord.gg/s3yjw9KT9"},
+      ],
       "VSPHONE": [
         { nama: "BASIC - 1 HARI = 4K", link: "https://discord.gg/dR9bVv3nB" },
         { nama: "BASIC - 7 HARI = 14K", link: "https://discord.gg/dR9bVv3nB" },
@@ -642,7 +654,7 @@ body {
         { nama: "MVIP - 7 HARI = tidak tersedia", link: "https://discord.gg/dR9bVv3nB" },
         { nama: "MVIP - 30 HARI = 402K", link: "https://discord.gg/dR9bVv3nB" },
       ],
-      "DRAG DRIVE SIMULATOR RBL": [
+      "DRAG DRIVE SIMULATOR": [
         { nama: "CUSTOM PLATE PASS = 10K", link: "https://discord.gg/jvzY4EKfX" },
         { nama: "2X PAYCHECK = 60K", link: "https://discord.gg/jvzY4EKfX" },
         { nama: "ADVANCE PAINT PASS = 8,5K", link: "https://discord.gg/jvzY4EKfX" },
@@ -825,6 +837,7 @@ body {
     renderList(dataBagian4, 'containerBagian4');
     renderList(dataBagian5, 'containerBagian5');
     renderList(dataBagian6, 'containerBagian6');
+    renderList(dataBagian7, 'containerBagian7');
     
     function filterProduk() {
         const input = document.getElementById('searchInput').value.toLowerCase();
@@ -865,7 +878,7 @@ body {
   </a>
 
   <!-- Tombol Mengambang Panah ke Bawah -->
-  <a href="#" onclick="window.scrollBy({top: 400, behavior: 'smooth'}); return false;" class="floating-scroll-btn" title="Scroll ke bawah">
+  <a href="#" onclick="window.scrollBy({top: 500, behavior: 'smooth'}); return false;" class="floating-scroll-btn" title="Scroll ke bawah">
       <svg viewBox="0 0 24 24">
           <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
       </svg>
