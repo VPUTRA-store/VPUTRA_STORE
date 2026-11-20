@@ -7,6 +7,89 @@
   <meta name="google-site-verification" content="googleb51ebc79c924710a.html" />
   
   <style>
+    /* Styling Tombol Tab Menu (Produk & Tentang) */
+    .tab-menu-container {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0 15px 0;
+        background: #f1f2f5;
+        padding: 5px;
+        border-radius: 12px;
+        border: 1px solid #dcdde1;
+    }
+
+    .tab-btn {
+        flex: 1;
+        background: transparent;
+        border: none;
+        padding: 10px;
+        font-size: 0.85rem;
+        font-weight: 800;
+        color: #666;
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.25s ease;
+    }
+
+    .tab-btn.active {
+        background-color: var(--primary-blue);
+        color: #fff;
+        box-shadow: 0 2px 8px rgba(27, 82, 232, 0.3);
+    }
+
+    /* Wrapper Halaman dengan Efek Transisi Geser */
+    .page-wrapper {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .page-content {
+        display: none;
+        width: 100%;
+        animation: slideIn 0.3s ease forwards;
+    }
+
+    .page-content.active-page {
+        display: block;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* Styling Halaman Tentang VPUTRA */
+    .about-card {
+        background: #ffffff;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 10px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+        color: #333;
+    }
+
+    .about-card h3 {
+        color: var(--primary-blue);
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+        font-weight: 900;
+    }
+
+    .about-card p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: #555;
+        margin-bottom: 15px;
+    }
+
 .footer-container {
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   color: #f8fafc;
@@ -402,51 +485,118 @@ body {
 
   <div class="container">
     
-<!-- Bagian Header Top Trending dan Kotak Transaksi -->
-<div class="trending-header">
-  <div class="section-title" style="margin: 0;">🔥 TOP TRENDING</div>
-  <div class="transaksi-kanan">
-    💰 TRANSAKSI SUKSES = <span id="jumlah-transaksi">EROR</span>
-  </div>
-</div>
+    <!-- Tab Menu Pilihan (Produk & Tentang) -->
+    <div class="tab-menu-container">
+        <button class="tab-btn active" id="btnProduk" onclick="gantiHalaman('produk')">PRODUK VPUTRA</button>
+        <button class="tab-btn" id="btnTentang" onclick="gantiHalaman('tentang')">TENTANG VPUTRA</button>
+    </div>
 
-<!-- INI YANG HARUS ADA DI BAWAHNYA SUPAYA PRODUK MUNCUL LAGI -->
-<div class="list-container" id="containerTrending"></div>
+    <!-- WRAPPER HALAMAN -->
+    <div class="page-wrapper">
+        
+        <!-- HALAMAN 1: PRODUK VPUTRA (Isi toko yang sudah ada) -->
+        <div id="halamanProduk" class="page-content active-page">
+            
+            <!-- Bagian Top Trending & List Produk kamu sebelumnya -->
+            <div class="trending-header">
+              <div class="section-title" style="margin: 0;">🔥 TOP TRENDING</div>
+              <div class="transaksi-kanan">
+                💰 TRANSAKSI SUKSES = <span id="jumlah-transaksi">EROR</span>
+              </div>
+            </div>
+            <div class="list-container" id="containerTrending"></div>
 
+            <a href="javascript:void(0)" class="banner-jual">
+              DAFTAR PRODUK by VPUTRA STORE
+            </a>
 
+            <div class="section-title">📱 CLOUD PHONE</div>
+            <div class="list-container" id="containerCloudPhone"></div>
 
+            <div class="section-title">💲 JUAL AKUN DI BAWAH!</div>
+            <div class="list-container" id="containerBagian1"></div>
 
-    
-    <a href="javascript:void(0)" class="banner-jual">
-      DAFTAR PRODUK by VPUTRA STORE
-    </a>
+            <div class="section-title">💲 BELI AKUN DI BAWAH!</div>
+            <div class="list-container" id="containerBagian2"></div>
 
-    <!-- CLOUD PHONE -->
-    <div class="section-title">📱 CLOUD PHONE</div>
-    <div class="list-container" id="containerCloudPhone"></div>
+            <div class="section-title">💲 JOKO DI BAWAH!</div>
+            <div class="list-container" id="containerBagian3"></div>
 
-    <div class="section-title">💲 JUAL AKUN DI BAWAH!</div>
-    <div class="list-container" id="containerBagian1"></div>
+            <div class="section-title">💲 BELI ITEM GAME DI BAWAH!</div>
+            <div class="list-container" id="containerBagian4"></div>
 
-    <div class="section-title">💲 BELI AKUN DI BAWAH!</div>
-    <div class="list-container" id="containerBagian2"></div>
+            <div class="section-title">💲 BELI GAMEPASS ROBLOX DI BAWAH!</div>
+            <div class="list-container" id="containerBagian5"></div>
 
-    <div class="section-title">💲 JOKO DI BAWAH!</div>
-    <div class="list-container" id="containerBagian3"></div>
+            <div class="section-title">💲 ORDER LAUNCHER+TIMER DI BAWAH!</div>
+            <div class="list-container" id="containerBagian6"></div>
 
-    <div class="section-title">💲 BELI ITEM GAME DI BAWAH!</div>
-    <div class="list-container" id="containerBagian4"></div>
+            <div class="section-title">💎 TOP UP GAME!</div>
+            <div class="list-container" id="containerBagian7"></div>
 
-    <div class="section-title">💲 BELI GAMEPASS ROBLOX DI BAWAH!</div>
-    <div class="list-container" id="containerBagian5"></div>
+        </div>
 
-    <div class="section-title">💲 ORDER LAUNCHER+TIMER DI BAWAH!</div>
-    <div class="list-container" id="containerBagian6"></div>
+                <!-- HALAMAN 2: TENTANG VPUTRA -->
+        <div id="halamanTentang" class="page-content">
+            <div class="about-card">
+                <h3>⚡ TENTANG VPUTRA STORE</h3>
+                <p>
+                    Selamat datang di platform resmi VPUTRA Store. Pusat tools automation, script Termux, dan kebutuhan gaming terpercaya kamu.
+                </p>
 
-    <div class="section-title">💎 TOP UP GAME!</div>
-    <div class="list-container" id="containerBagian7"></div>
-    
-  </div>
+                <h3>📺 SOCIAL MEDIA</h3>
+                <p>
+                    • <strong>YOUTUBE:</strong> <a href="https://youtube.com/@VPUTRA_01" target="_blank" style="color: var(--primary-blue); text-decoration: none;">@VPUTRA_01</a><br>
+                    • <strong>TIKTOK:</strong> <a href="https://tiktok.com/@vputra_01" target="_blank" style="color: var(--primary-blue); text-decoration: none;">@vputra_01</a>
+                </p>
+
+                <h3>🚀 PROJECT BUATAN VPUTRA</h3>
+                
+                <!-- VP Launcher VIP -->
+                <div style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
+                    <strong style="color: #111; font-size: 0.95rem;">💎 VP LAUNCHER VIP</strong>
+                    <p style="margin: 6px 0 10px 0; font-size: 0.85rem; color: #555;">
+                        List Harga:<br>
+                        • 1 Minggu = 4,5K<br>
+                        • 1 Bulan = 11K<br>
+                        • Permanen = 150K
+                    </p>
+                    <a href="https://discord.gg/s3yjw9KT9" target="_blank" class="btn-minat" style="text-align: center; margin: 0; padding: 8px; font-size: 0.8rem;">🛒 BELI VIA DISCORD</a>
+                </div>
+
+                <!-- VP Launcher Free -->
+                <div style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 15px;">
+                    <strong style="color: #111; font-size: 0.95rem;">🔥 VP LAUNCHER FREE</strong>
+                    <p style="margin: 6px 0 10px 0; font-size: 0.85rem; color: #555;">
+                        Versi gratis untuk kebutuhan automation dasar kamu.
+                    </p>
+                    <a href="https://discord.gg/UQfmRHTzB" target="_blank" class="btn-minat" style="text-align: center; margin: 0; padding: 8px; font-size: 0.8rem; background-color: #3b82f6;">📥 DOWNLOAD / MENU DISCORD</a>
+                </div>
+
+<h3>🚀 REKOMENDASI DELTA LITE by VPUTRA</h3>
+                
+                <!-- VP Launcher VIP -->
+                <div style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 12px; margin-bottom: 12px;">
+                    <strong style="color: #111; font-size: 0.95rem;">💎 DELTA LITE(recomend)</strong>
+                    <p style="margin: 6px 0 10px 0; font-size: 0.85rem; color: #555;">
+                        List delta:<br>
+                        • NO MERCY DELTA LITE FREE<br>
+                        • ZETZU DELTA LITE FREE<br>
+                    </p>
+              <a href="https://discord.gg/VGH6hQpmW" target="_blank" class="btn-minat" style="text-align: center; margin: 0; padding: 8px; font-size: 0.8rem; background-color: #3b82f6;">📥 DOWNLOAD / MENU DISCORD</a>
+                </div>
+              
+                <h3>🔗 KOMUNITAS & INFORMASI</h3>
+                <p>
+                    • <a href="https://discord.gg/hRHh3StNg" target="_blank" style="color: var(--primary-blue); font-weight: bold; text-decoration: none;">Discord VPUTRA</a><br>
+                    • <a href="https://discord.gg/link-jb-kamu" target="_blank" style="color: var(--primary-blue); font-weight: bold; text-decoration: none;">Discord JB</a>
+                </p>
+                <p style="text-align: center; font-weight: bold; color: #666; margin-top: 15px; font-size: 0.85rem;">
+                    -- BY VPUTRA --
+                </p>
+            </div>
+        </div>
+
 
   <!-- Modal Pop-up Sub-Menu / Detail Akun -->
   <div class="modal-overlay" id="productModal">
@@ -632,7 +782,7 @@ body {
       ],
     "LAUNCHER+TIMERS": [
        {nama: "LAUNCHER VIP+", link: "https://discord.gg/s3yjw9KT9"},
-       {nama: "LAUNCHER(Free)", link: "https://discord.gg/s3yjw9KT9"},
+       {nama: "LAUNCHER(Free)", link: "https://discord.gg/UQfmRHTzB"},
       ],
       "VSPHONE": [
         { nama: "BASIC - 1 HARI = 4K", link: "https://discord.gg/dR9bVv3nB" },
@@ -868,6 +1018,30 @@ body {
             }
         }
     });
+
+    // Fungsi untuk beralih halaman dengan animasi dari kanan ke kiri
+    function gantiHalaman(target) {
+        const halamanProduk = document.getElementById('halamanProduk');
+        const halamanTentang = document.getElementById('halamanTentang');
+        const btnProduk = document.getElementById('btnProduk');
+        const btnTentang = document.getElementById('btnTentang');
+
+        if (target === 'produk') {
+            halamanTentang.classList.remove('active-page');
+            halamanProduk.classList.add('active-page');
+            
+            btnProduk.classList.add('active');
+            btnTentang.classList.remove('active');
+        } else if (target === 'tentang') {
+            halamanProduk.classList.remove('active-page');
+            halamanTentang.classList.add('active-page');
+            
+            btnTentang.classList.add('active');
+            btnProduk.classList.remove('active');
+        }
+    }
+
+    
   </script>
 
   <!-- Tombol Mengambang Discord -->
@@ -964,6 +1138,7 @@ body {
     </div>
 
   </div>
+  
 </footer>
   
 </html>
